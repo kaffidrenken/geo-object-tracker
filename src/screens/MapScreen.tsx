@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+importimport React, { useEffect, useState } from "react";
 import { View, Text, TouchableOpacity, Alert } from "react-native";
-import MapboxGL from "react-native-maplibre-gl";
+import MapLibreGL from "@maplibre/maplibre-react-native";
 import * as Location from "expo-location";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
@@ -8,9 +8,6 @@ import { createPin, setPinStatus, subscribeActivePins, Pin } from "../services/p
 import { setObjectPin } from "../bg/locationTask";
 import { ARRIVAL_RADIUS_M } from "../constants";
 import { haversine } from "../utils/geo";
-
-// MapLibre does not require a token
-MapboxGL.setAccessToken(null as any);
 
 // Public demo style; replace with your own later if you like
 const STYLE_URL = "https://demotiles.maplibre.org/style.json";
@@ -84,12 +81,12 @@ export default function MapScreen() {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#fff" }}>
-      <MapboxGL.MapView
+      <MapLibreGL.MapView
         style={{ flex: 1 }}
         styleURL={STYLE_URL}
         onPress={handleMapPress}
       >
-        <MapboxGL.Camera
+        <MapLibreGL.Camera
           zoomLevel={14}
           centerCoordinate={
             user ? [user.longitude, user.latitude] : [6.1319, 49.6116] // Luxembourg fallback
@@ -98,25 +95,25 @@ export default function MapScreen() {
 
         {/* User location marker */}
         {user && (
-          <MapboxGL.PointAnnotation id="me" coordinate={[user.longitude, user.latitude]}>
+          <MapLibreGL.PointAnnotation id="me" coordinate={[user.longitude, user.latitude]}>
             <View style={{ width: 12, height: 12, borderRadius: 6, backgroundColor: "#007AFF" }} />
-          </MapboxGL.PointAnnotation>
+          </MapLibreGL.PointAnnotation>
         )}
 
         {/* Object pin */}
         {objectPin && (
-          <MapboxGL.PointAnnotation id="obj" coordinate={[objectPin.longitude, objectPin.latitude]}>
+          <MapLibreGL.PointAnnotation id="obj" coordinate={[objectPin.longitude, objectPin.latitude]}>
             <View style={{ width: 16, height: 16, borderRadius: 8, backgroundColor: "#FF2D55" }} />
-          </MapboxGL.PointAnnotation>
+          </MapLibreGL.PointAnnotation>
         )}
 
         {/* Active pins from Firestore (public) */}
         {activePins.map((p) => (
-          <MapboxGL.PointAnnotation key={p.id} id={p.id!} coordinate={[p.lng, p.lat]}>
+          <MapLibreGL.PointAnnotation key={p.id} id={p.id!} coordinate={[p.lng, p.lat]}>
             <View style={{ width: 14, height: 14, borderRadius: 7, backgroundColor: "#34C759" }} />
-          </MapboxGL.PointAnnotation>
+          </MapLibreGL.PointAnnotation>
         ))}
-      </MapboxGL.MapView>
+      </MapLibreGL.MapView>
 
       {/* Footer controls */}
       <View style={{ position: "absolute", bottom: 20, left: 20, right: 20 }}>

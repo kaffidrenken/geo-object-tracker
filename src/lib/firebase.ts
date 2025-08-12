@@ -4,12 +4,13 @@ import { getFirestore } from "firebase/firestore";
 // ⬇️ Replace these with YOUR values from Firebase Console:
 // Firebase Console → Project Overview → "Add app" (Web) → copy the config object
 const firebaseConfig = {
-  apiKey: "PASTE_API_KEY",
-  authDomain: "PASTE_AUTH_DOMAIN",
-  projectId: "PASTE_PROJECT_ID",
-  storageBucket: "PASTE_STORAGE_BUCKET",
-  messagingSenderId: "PASTE_MESSAGING_SENDER_ID",
-  appId: "PASTE_APP_ID",
+  apiKey: "AIzaSyAfVBstkc1ABTl8Vp61naJbGybsyW1-NKA",
+  authDomain: "geotrack-1257b.firebaseapp.com",
+  projectId: "geotrack-1257b",
+  storageBucket: "geotrack-1257b.firebasestorage.app",
+  messagingSenderId: "536928743188",
+  appId: "1:536928743188:web:07e33d364b0809115b1c01",
+  measurementId: "G-SNVSSQFREM"
 };
 
 // Avoid re-initializing in dev/hot-reload
