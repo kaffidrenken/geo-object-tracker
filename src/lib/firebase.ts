@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 // ⬇️ Replace these with YOUR values from Firebase Console:
 // Firebase Console → Project Overview → "Add app" (Web) → copy the config object
 const firebaseConfig = {
-  apiKey: "AIzaSyAfVBstkc1ABTl8Vp61naJbGybsyW1-NKA",
+  apiKey: "AIzaSyB-14Z5k0BQOQFDUoAIJE1jUjRvn1gm3ak",
   authDomain: "geotrack-1257b.firebaseapp.com",
   projectId: "geotrack-1257b",
   storageBucket: "geotrack-1257b.firebasestorage.app",
