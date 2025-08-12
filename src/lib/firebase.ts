@@ -1,19 +1,22 @@
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getAuth, signInAnonymously } from "firebase/auth";
+import Constants from "expo-constants";
 
-// ⬇️ Replace these with YOUR values from Firebase Console:
-// Firebase Console → Project Overview → "Add app" (Web) → copy the config object
-const firebaseConfig = {
-  apiKey: "AIzaSyB-14Z5k0BQOQFDUoAIJE1jUjRvn1gm3ak",
-  authDomain: "geotrack-1257b.firebaseapp.com",
-  projectId: "geotrack-1257b",
-  storageBucket: "geotrack-1257b.firebasestorage.app",
-  messagingSenderId: "536928743188",
-  appId: "1:536928743188:web:07e33d364b0809115b1c01",
-  measurementId: "G-SNVSSQFREM"
-};
+// Read values passed via app.config.js -> extra.firebase
+const cfg = (Constants.expoConfig?.extra as any)?.firebase;
 
-// Avoid re-initializing in dev/hot-reload
-const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
+if (!cfg || !cfg.apiKey) {
+  throw new Error(
+    "Missing Firebase env (FIREBASE_*). Create a .env locally and add EAS Secrets for cloud builds."
+  );
+}
+
+// Avoid double-initializing
+const app = getApps().length ? getApp() : initializeApp(cfg);
 
 export const db = getFirestore(app);
+export const auth = getAuth(app);
+
+// Sign in anonymously so Firestore rules can verify ownerUid
+signInAnonymously(auth).catch(console.error);
